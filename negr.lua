@@ -3235,8 +3235,12 @@ function OpenGUI()
 
     serj.guiCheckBox("Enable eyes hitbox","eyes_e",ascrol)
     serj.DropDown("Hitbox selection", { "Head | Голова", "Eyes | Глаза", "Penis | Пенис", "Spine | Спина", "Center | Центр", "Бошка", "Бошечка", "Башкирка", "Prediction", "Predictioned", "Predict 3 ion", "Predictio 2n", "40 2n", "-40 2n", }, "hitbox_selection", ascrol)
-    --serj.guiCheckBox("Hitscan head","hs_h",ascrol)
-	--serj.guiCheckBox("Hitscan body","hs_b",ascrol)
+    serj.CreateSlider("Aim offset Y", "°", "aim_hed_offset", 0, 1500, 0,ascrol)
+    serj.guiCheckBox("Backtrack","btr_enable",ascrol)
+    serj.DropDown("Mode", { "FOV", "Distance", "Health" }, "Backtrack_mode", ascrol)
+    serj.CreateSlider("Backtrack time", "°", "btr_time", 0, 12, 0,ascrol)
+    serj.guiCheckBox("Hitscan head","hs_h",ascrol)
+	serj.guiCheckBox("Hitscan body","hs_b",ascrol)
 	serj.guiCheckBox("Hitscan arms","hitbox_arms",ascrol)
 	serj.guiCheckBox("Hitscan legs","hitbox_legs",ascrol)
     serj.guiCheckBox("Disable taunt","Disable_taunts",ascrol)
@@ -3251,9 +3255,6 @@ function OpenGUI()
 	serj.guiCheckBox("Auto fire","af_enable",ascrol)
 	serj.guiCheckBox("Auto reload","ar_enable",ascrol)
 	serj.guiCheckBox("Auto wallbang","aw_enable",ascrol)
-    serj.guiCheckBox("Backtrack","btr_enable",ascrol)
-    --serj.DropDown("Mode", { "FOV", "Distance", "Health" }, "Backtrack_mode", ascrol)
-    serj.CreateSlider("Backtrack time", "°", "btr_time", 1, 5, 0,ascrol)
     serj.guiCheckBox("Extrapolation","Extrapolation",ascrol)
     serj.guiCheckBox("Engine pred","engine_pred",ascrol)
     serj.guiCheckBox("EngineC pred","engineC_pred",ascrol)
@@ -4850,37 +4851,37 @@ function serj.getAimHitbox(v) --"Head", "Eyes", "Body", "Spine", "Center", "Бо
     end
 
     if serj.cfg.Vars["hitbox_selection"] == 1 and head != nil then
-        return head
+        return head + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)
     elseif serj.cfg.Vars["hitbox_selection"] == 2 and eyes != nil then
-        return eyes
+        return eyes + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 3 and body != nil then
-        return body
+        return body + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)   
     elseif serj.cfg.Vars["hitbox_selection"] == 4 and spine != nil then
-        return spine
+        return spine + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
     elseif serj.cfg.Vars["hitbox_selection"] == 5 then
-        return pos
+        return pos + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
     elseif serj.cfg.Vars["hitbox_selection"] == 6 and head != nil then
-        return head + Vector(0,0,-3)
+        return head + Vector(0,0,-3) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 7 and head != nil then
-        return head + Vector(0,0,-5)
+        return head + Vector(0,0,-5) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
     elseif serj.cfg.Vars["hitbox_selection"] == 8 and spine != nil then
-        return spine + Vector(0,6,5)
+        return spine + Vector(0,6,5) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
         elseif serj.cfg.Vars["hitbox_selection"] == 9 and spine != nil then
-        return spine + Vector(-20,0,10)
+        return spine + Vector(-20,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
         elseif serj.cfg.Vars["hitbox_selection"] == 10 and spine != nil then
-        return eyes + Vector(20,0,10)
+        return eyes + Vector(20,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100)  
         elseif serj.cfg.Vars["hitbox_selection"] == 11 and spine != nil then
-        return eyes + Vector(-30,0,10)
+        return eyes + Vector(-30,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
         elseif serj.cfg.Vars["hitbox_selection"] == 12 and spine != nil then
-        return eyes + Vector(30,0,10)
+        return eyes + Vector(30,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 13 and spine != nil then
-        return eyes + Vector(40,0,10)
+        return eyes + Vector(40,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 14 and spine != nil then
-        return eyes + Vector(-40,0,10)
+        return eyes + Vector(-40,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 15 and spine != nil then
-        return eyes + Vector(-50,0,10)
+        return eyes + Vector(-50,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     elseif serj.cfg.Vars["hitbox_selection"] == 16 and spine != nil then
-            return eyes + Vector(50,0,10)
+            return eyes + Vector(50,0,10) + Vector(0,0,serj.cfg.Vars["aim_hed_offset"]/100) 
     else
         return pos
 end
